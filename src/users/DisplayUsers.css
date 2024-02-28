@@ -1,0 +1,9 @@
+ul.users {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+ul.users li {
+  flex: auto;
+  padding: 10px 0px;
+}
