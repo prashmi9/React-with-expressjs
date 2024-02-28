@@ -43,20 +43,29 @@ app.get("/api/users", (req, res) => {
 app.post("/api/register", (req, res) => {
   const { id, name, email, message } = req.body;
 
-  // Here, you would typically save the user data to a database
-  // For demonstration purposes, we'll just log the data for now
   console.log("Received user data:", { id, name, email, message });
   users.push({ id, name, email, message });
 
   // Respond with a success message
   res.json({ message: "User registered successfully here" });
 });
+app.delete("/api/delete/:id", (req, res) => {
+  const userId = parseInt(req.params.id);
+  const index = users.findIndex((user) => user.id === userId);
+  if (index > -1) {
+    users.splice(index, 1);
+    res.json({ message: "User deleted successfully" });
+  } else {
+    res.status(404).json({ error: "User not found" });
+  }
+});
 app.put("/api/update/:id", (req, res) => {
-  const userId = req.params.id;
-  const { name, email, message } = req.body;
+  const userId = parseInt(req.params.id);
 
+  const { name, email, message } = req.body;
+  const index = users.findIndex((user) => user.id === userId);
   // Find the user by id in your user data array or database
-  const user = users.find((user) => user.id === userId);
+  const user = [...users].find((user) => user.id === userId);
 
   if (!user) {
     return res.status(404).json({ error: "User not found" });
@@ -66,7 +75,7 @@ app.put("/api/update/:id", (req, res) => {
   user.name = name;
   user.email = email;
   user.message = message;
-
+  users[index] = user;
   // Respond with updated user data
   res.json({ message: "User data updated successfully", user });
 });
