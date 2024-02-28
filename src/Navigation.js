@@ -2,7 +2,7 @@ import React from "react";
 import "./Navigation.css";
 function Navigation() {
   return (
-    <nav>
+    <nav data-testid="navigation">
       <ul>
         <li>
           <a href="/">Home</a>

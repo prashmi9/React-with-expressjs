@@ -91,52 +91,50 @@ function DisplayUsers(props) {
   };
 
   return (
-    <div>
+    <div data-testid="users">
       <h2>Users</h2>
       <ul className="users">
         {users.map((user, key) => (
-          <>
-            <li key={user.id}>
-              <strong>ID:</strong> <span id="userId">{user.id}</span>,
-              <strong>Name:</strong> {user.name}, <strong>Email:</strong>{" "}
-              {user.email}
-              <button
-                onClick={() => {
-                  showHideForm(key);
-                }}
+          <li key={user.id}>
+            <strong>ID:</strong> <span id="userId">{user.id}</span>,
+            <strong>Name:</strong> {user.name}, <strong>Email:</strong>{" "}
+            {user.email}
+            <button
+              onClick={() => {
+                showHideForm(key);
+              }}
+            >
+              Edit
+            </button>
+            <button onClick={deleteUser}>Delete</button>
+            {showForm === key && (
+              <form
+                key={user.id}
+                onSubmit={(event) => handleSubmit(event, user.id)}
               >
-                Edit
-              </button>
-              <button onClick={deleteUser}>Delete</button>
-              {showForm === key && (
-                <form
-                  key={user.id}
-                  onSubmit={(event) => handleSubmit(event, user.id)}
-                >
-                  <input type="text" value={user.id} disabled />
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={updateUser}
-                  />
-                  <input
-                    type="text"
-                    name="email"
-                    onChange={updateUser}
-                    value={formData.email}
-                  />
-                  <input
-                    type="text"
-                    name="message"
-                    onChange={updateUser}
-                    value={formData.message}
-                  />
-                  <button type="submit">Save</button>
-                </form>
-              )}
-            </li>
-          </>
+                <input type="text" value={user.id} disabled />
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={updateUser}
+                />
+                <input
+                  type="text"
+                  name="email"
+                  onChange={updateUser}
+                  value={formData.email}
+                />
+                <input
+                  type="text"
+                  name="message"
+                  onChange={updateUser}
+                  value={formData.message}
+                />
+                <button type="submit">Save</button>
+              </form>
+            )}
+          </li>
         ))}
       </ul>
     </div>
