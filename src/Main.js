@@ -9,7 +9,7 @@ function MainContent() {
     settotalUsers(data);
   };
   return (
-    <main>
+    <main data-testid="main">
       <h2>Main Content</h2>
       <p>Welcome to the main content area.</p>
       <h4>Total Users: {totalUsers}</h4>
