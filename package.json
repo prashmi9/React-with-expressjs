@@ -20,13 +20,22 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha --require @babel/register --require jsdom-global/register --recursive ./src/**/*.test.js --require ./setup.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/transform-class-properties"
     ]
   },
   "browserslist": {
@@ -42,6 +51,13 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/register": "^7.23.7",
+    "@cfaester/enzyme-adapter-react-18": "^0.7.1",
+    "chai": "^5.1.0",
+    "enzyme": "^3.11.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^10.3.0"
   }
 }
